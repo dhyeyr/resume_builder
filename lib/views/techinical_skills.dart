@@ -13,6 +13,7 @@ class _EducationState extends State<techinical> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white70,
       body: Column(
         children: [
           Stack(

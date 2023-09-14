@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:resume_builder/views/contect.dart';
  import 'package:resume_builder/constant.dart';
-
+import 'package:resume_builder/views/resume.dart';
+Resume resume=Resume();
 List<Map> menuList = [
   {
     "icon": Icons.quick_contacts_dialer,

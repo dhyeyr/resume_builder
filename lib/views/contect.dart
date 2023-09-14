@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:resume_builder/constant.dart';
+import 'package:resume_builder/util.dart';
 
 class contect extends StatefulWidget {
   const contect({Key? key}) : super(key: key);
@@ -130,7 +132,6 @@ class _contectState extends State<contect> {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 400,
                       width: 400,
                       padding: EdgeInsets.all(10),
                       margin: EdgeInsets.all(21),
@@ -149,10 +150,29 @@ class _contectState extends State<contect> {
                                 width: 15,
                               ),
                               Expanded(
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                      hintText: "Name",
-                                      hintStyle: TextStyle(color: Colors.grey)),
+                                child: TextFormField(
+                                  // initialValue: "",
+                                  controller: nameController,
+                                  onFieldSubmitted: (value) {
+                                    print("onFieldSubmitted $value");
+                                  },
+                                  // controller: nameController,
+                                  // onChanged: (value) {
+                                  //   name = value;
+                                  //   print(value);
+                                  // },
+                                  onSaved: (newValue) {
+                                    print("On Save $newValue");
+                                    name = newValue ?? "";
+                                  },
+                                  validator: (value) {
+                                    if (value?.isEmpty ?? false) {
+                                      return "Enter Your Name";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(hintText: "Name", hintStyle: TextStyle(color: Colors.grey)),
                                 ),
                               )
                             ],
@@ -220,9 +240,10 @@ class _contectState extends State<contect> {
                                 child: Column(
                                   children: [
                                     TextField(
+                                      controller: addressController,
                                       keyboardType: TextInputType.streetAddress,
-                                      obscureText: true,
-                                      obscuringCharacter: "-",
+                                     // obscureText: true,
+                                     // obscuringCharacter: "-",
                                       decoration: InputDecoration(
                                         hintText: "Address",
                                         // prefix: Icon(Icons.phone_android),
@@ -231,6 +252,7 @@ class _contectState extends State<contect> {
                                       ),
                                     ),
                                     TextField(
+                                      controller: address1Controller,
                                       decoration: InputDecoration(
                                         hintText: "Address Line 1",
                                         // prefix: Icon(Icons.phone_android),
@@ -239,6 +261,7 @@ class _contectState extends State<contect> {
                                       ),
                                     ),
                                     TextField(
+                                      controller: address2Controller,
                                       decoration: InputDecoration(
                                         hintText: "Address Line 2",
                                         // prefix: Icon(Icons.phone_android),
@@ -251,8 +274,115 @@ class _contectState extends State<contect> {
                               ),
                             ],
                           ),
+
+                          // Row(
+                          //   mainAxisSize: MainAxisSize.min,
+                          //   children: [
+                          //     ElevatedButton(
+                          //         onPressed: () {
+                          //           if (formKey.currentState?.validate() ?? false) {
+                          //             FocusScope.of(context).unfocus(); // For keyboard Close
+                          //             formKey.currentState?.save();
+                          //             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          //               content: Text("Save Successfully"),
+                          //               duration: Duration(seconds: 3),
+                          //               backgroundColor: Colors.red,
+                          //               action: SnackBarAction(
+                          //                 label: "Send",
+                          //                 onPressed: () {},
+                          //               ),
+                          //             ));
+                          //             resume.name=nameController.text;
+                          //             resume.email=emailController.text;
+                          //             resume.phone=phoneController.text;
+                          //             resume.address1=addressController.text;
+                          //             resume.address2=address1Controller.text;
+                          //             resume.address3=address2Controller.text;
+                          //
+                          //
+                          //             Navigator.pushNamed(context, pdfScreenRoute,arguments: resume);
+                          //
+                          //             print("Save $name");
+                          //           } else {
+                          //             print("Invalid");
+                          //           }
+                          //         },
+                          //         child: Text("Save")),
+                          //     SizedBox(
+                          //       width: 15,
+                          //     ),
+                          //     ElevatedButton(
+                          //         onPressed: () {
+                          //           print("Reset");
+                          //           // nameController.clear();
+                          //           // emailController.clear();
+                          //           // phoneController.text = "";
+                          //           // addressController.text = "";
+                          //           // address1Controller.text = "";
+                          //           // address2Controller.text = "";
+                          //
+                          //           formKey.currentState?.reset();
+                          //           FocusScope.of(context).unfocus(); // For keyboard Close
+                          //         },
+                          //         child: Text("Reset")),
+                          //   ],
+                          // )
+
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    if (formKey.currentState?.validate() ?? false) {
+                                      FocusScope.of(context).unfocus(); // For keyboard Close
+                                      formKey.currentState?.save();
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                        content: Text("Save Successfully"),
+                                        duration: Duration(seconds: 3),
+                                        backgroundColor: Colors.red,
+                                        action: SnackBarAction(
+                                          label: "Send",
+                                          onPressed: () {},
+                                        ),
+                                      ));
+                                      resume.name=nameController.text;
+                                      resume.email=emailController.text;
+                                      resume.phone=phoneController.text;
+                                      resume.address1=addressController.text;
+                                      resume.address2=address1Controller.text;
+                                      resume.address3=address2Controller.text;
+
+
+                                      Navigator.pushNamed(context, pdfScreenRoute,arguments: resume);
+
+                                      print("Save $name");
+                                    } else {
+                                      print("Invalid");
+                                    }
+                                  },
+                                  child: Text("Save")),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    print("Reset");
+                                    // nameController.clear();
+                                    // emailController.clear();
+                                    // phoneController.text = "";
+                                    // addressController.text = "";
+                                    // address1Controller.text = "";
+                                    // address2Controller.text = "";
+
+                                    formKey.currentState?.reset();
+                                    FocusScope.of(context).unfocus(); // For keyboard Close
+                                  },
+                                  child: Text("Reset")),
+                            ],
+                          )
                         ],
                       ),
+
                     ),
                   ),
                   Padding(

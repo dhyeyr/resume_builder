@@ -11,3 +11,4 @@ const String projects="/projects";
 const String archivment="/Archivment";
 const String refrences="/refrences";
 const String declaration="/declaration";
+const String pdfScreenRoute="/PDF_screen";

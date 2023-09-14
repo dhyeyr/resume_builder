@@ -14,6 +14,7 @@ import 'package:resume_builder/views/declaration.dart';
 import 'package:resume_builder/views/education.dart';
 import 'package:resume_builder/views/experiences.dart';
 import 'package:resume_builder/views/hobbies.dart';
+import 'package:resume_builder/views/pdf_screen.dart';
 import 'package:resume_builder/views/refrences.dart';
 import 'package:resume_builder/views/techinical_skills.dart';
 
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
          archivment: (context) => Archivment(),
          refrences: (context) => Refrences(),
          declaration: (context) => Declaration(),
+         pdfScreenRoute: (context) => PDFScreen()
        },
     );
   }
